@@ -1,7 +1,7 @@
 @import './variable.scss';
 @import './base-size.scss';
 
-//gen color background-color
+// gen color background-color
 @each $colorTypeKey, $colorTypeValue in $color-type {
   @each $colorKey, $colorValue in $color {
     .#{ $colorTypeKey }-#{ $colorKey } {
@@ -10,7 +10,7 @@
   }
 }
 
-//gen padding margin my
+// gen padding margin my
 @each $typeKey, $typeValue in $spacing-type {
   //mt-num
   @each $directionKey, $directionValue in $spacing-direction {
@@ -41,63 +41,63 @@
   }
 }
 
-//gen font-size
+// gen font-size
 @each $sizeValue in $text-size {
   .text-#{ $sizeValue } {
     font-size: $sizeValue * $base-font-size;
   }
 }
 
-//gen font-weight
+// gen font-weight
 @each $weightValue in $text-weight {
-  .font-weight-#{ $weightValue } {
+  .text-weight-#{ $weightValue } {
     font-weight: $weightValue;
   }
 }
 
-//gen text-align
+// gen text-align
 @each $textLayoutValue in $text-layout {
   .text-#{ $textLayoutValue } {
     text-align: $textLayoutValue;
   }
 }
 
-//gen display
+// gen display
 @each $displayValue in $d-value {
   .d-#{ $displayValue } {
     display: $displayValue;
   }
 }
 
-//gen justify-content
+// gen justify-content
 @each $jcKey, $jcValue in $jc-value {
   .jc-#{ $jcKey } {
     justify-content: $jcValue;
   }
 }
 
-//gen align-items
+// gen align-items
 @each $aiKey, $aiValue in $ai-value {
   .ai-#{ $aiKey } {
     align-items: $aiValue;
   }
 }
 
-//gen align-content
+// gen align-content
 @each $acKey, $acValue in $ac-value {
   .ac-#{ $acKey } {
     align-content: $acValue;
   }
 }
 
-//gen flex-wrap
+// gen flex-wrap
 @each $wrapKey, $wrapValue in $flex-wrap-value {
   .flex-#{ $wrapKey } {
     flex-wrap: $wrapValue;
   }
 }
 
-//gen flex-grow flex-shrink
+// gen flex-grow flex-shrink
 @each $scaleTypeValue in $flex-item-scale-type {
   @each $scaleSizeValue in $flex-item-scale-size {
     .flex-#{ $scaleTypeValue }-#{ $scaleSizeValue } {
@@ -106,14 +106,14 @@
   }
 }
 
-//gen position
+// gen position
 @each $positionValue in $position-value {
   .pos-#{ $positionValue } {
     position: $positionValue;
   }
 }
 
-//gen top...
+// gen top...
 @each $directionKey, $directionValue in $position-direction {
   @each $sizeValue in $position-size {
     .#{ $directionKey }-#{ $sizeValue } {
@@ -122,7 +122,7 @@
   }
 }
 
-//gen border
+// gen border
 @each $colorKey, $colorValue in $border-color {
   @each $sizeValue in $border-size {
     .border-#{ $colorKey }-#{ $sizeValue } {
@@ -131,19 +131,26 @@
   }
 }
 
-//gen raduis
+// gen raduis
 @each $radiusValue in $border-radius {
   .border-radius-#{ $radiusValue } {
     border-radius: $radiusValue * $base-border-size;
   }
 }
 
-//gen cursor
+// gen cursor
 @each $cursorValue in $cursor-value {
   .cursor-#{ $cursorValue } {
     cursor: $cursorValue;
     //防止出现用户选择样式
     user-select: none;
+  }
+}
+
+// gen vertical-align
+@each $value in $vertical-align {
+  .va-#{ $value } {
+    vertical-align: $value;
   }
 }
 
@@ -155,4 +162,8 @@
 
 .w100 {
   width: 100%;
+}
+
+.no-resize {
+  resize: none;
 }

@@ -1,7 +1,7 @@
 const merge = require('webpack-merge')
 const tsImportPluginFactory = require('ts-import-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-
+const path = require('path')
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 
@@ -22,7 +22,11 @@ module.exports = {
     loaderOptions: {
       // 设置 scss 公用变量文件
       sass: {
-        data: `@import '~@/assets/style/public.scss';`
+        sassOptions: {
+          includePaths: [path.resolve(__dirname, 'src/core/')],
+          indentedSyntax: true
+        },
+        prependData: '@import "~@/assets/style/public.scss"'
       }
     }
   },
@@ -50,9 +54,7 @@ module.exports = {
         return options
       })
 
-    config.resolve.alias
-      .set('@', resolve('src'))
-      .set('assets', resolve('src/assets'))
+    config.resolve.alias.set('assets', resolve('src/assets'))
 
     config.optimization.minimizer('terser').tap(args => {
       // 去除生产环境console
