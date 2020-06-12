@@ -3,17 +3,20 @@ import VueRouter, { RouteConfig } from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () =>
-      import(/* webpackChunkName: "home" */ '../views/main/Home.vue'),
-  },
-]
+const routesContext = require.context('./modules', true, /\.ts$/)
+let routes: Array<RouteConfig> = []
+routesContext.keys().forEach(router => {
+  const routerConfig = routesContext(router)
+  /**
+   * 兼容 import export 和 require module.export 两种规范
+   */
+  const ctrl = routerConfig.default || routerConfig
+
+  routes.push(ctrl)
+})
 
 const router = new VueRouter({
-  routes,
+  routes
 })
 
 export default router
