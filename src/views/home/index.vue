@@ -44,6 +44,7 @@ export default class Home extends Vue {
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 99;
     ::v-deep .van-tabs {
       flex: 1;
       margin: 0 18px;
