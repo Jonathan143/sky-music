@@ -1,16 +1,24 @@
 <template>
   <div class="home">
-    <router-view />
+    <div class="home-header">
+      <van-icon name="search" />
+      <van-tabs v-model="active"
+        color="#9025fc"
+        title-active-color="#303133">
+        <template v-for="tab of tabList">
+          <van-tab :title="tab"
+            :key="tab"
+            :name="tab"
+            :to="{name:`home${tab}`}" />
+        </template>
+      </van-tabs>
+      <van-image round
+        width="30px"
+        height="30px"
+        src="https://img.yzcdn.cn/vant/cat.jpeg" />
+    </div>
 
-    <van-tabbar v-model="active"
-      active-color="#7809ea"
-      safe-area-inset-bottom>
-      <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="search">标签</van-tabbar-item>
-      <van-tabbar-item></van-tabbar-item>
-      <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
-    </van-tabbar>
+    <router-view />
   </div>
 </template>
 
@@ -19,9 +27,39 @@ import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Home extends Vue {
-  active = 0
+  active = 'Suggest'
+  tabList = ['Suggest', 'Favorites', 'Library']
 }
 </script>
 
 <style lang="scss" scoped>
+.home {
+  height: 500px;
+  &-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: 0;
+    ::v-deep .van-tabs {
+      flex: 1;
+      margin: 0 18px;
+      .van-tabs__nav {
+        background-color: unset;
+      }
+      .van-tab__text {
+        transition: all 0.3s ease-in-out;
+        font-weight: 600;
+      }
+      .van-tab--active {
+        .van-tab__text {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
 </style>

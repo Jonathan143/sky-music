@@ -7,14 +7,26 @@ export default {
   path: '/',
   name: 'home',
   meta,
-  redirect: { name: 'homeDiscovery' },
+  redirect: { name: 'homeLibrary' },
   component: _import('home'),
   children: (pre => [
     {
-      path: 'discovery',
-      name: `${pre}Discovery`,
-      component: _import('home/discovery'),
-      meta: { title: '发现', cache: true }
+      path: 'library',
+      name: `${pre}Library`,
+      component: _import('home/library'),
+      meta: { title: '推荐', cache: true }
+    },
+    {
+      path: 'favorites',
+      name: `${pre}Favorites`,
+      component: _import('home/favorites'),
+      meta: { title: '我的喜欢', cache: true }
+    },
+    {
+      path: 'suggest',
+      name: `${pre}Suggest`,
+      component: _import('home/suggest'),
+      meta: { title: '曲库', cache: true }
     }
   ])('home')
 }

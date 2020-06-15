@@ -22,11 +22,7 @@ module.exports = {
     loaderOptions: {
       // 设置 scss 公用变量文件
       sass: {
-        sassOptions: {
-          includePaths: [path.resolve(__dirname, 'src/core/')],
-          indentedSyntax: true
-        },
-        prependData: '@import "~@/assets/style/public.scss"'
+        prependData: `@import '~@/assets/style/public.scss';`
       }
     }
   },

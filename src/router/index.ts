@@ -4,7 +4,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 Vue.use(VueRouter)
 
 const routesContext = require.context('./modules', true, /\.ts$/)
-let routes: Array<RouteConfig> = []
+const routes: Array<RouteConfig> = []
 routesContext.keys().forEach(router => {
   const routerConfig = routesContext(router)
   /**

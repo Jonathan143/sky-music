@@ -12,7 +12,7 @@
     "NeteaseCloudMusicApi": "^3.32.3",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "vant": "^2.8.5",
+    "vant": "^2.8.6",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
