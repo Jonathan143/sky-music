@@ -10,11 +10,14 @@
         </template>
       </slot>
     </div>
-    <slot name="icon">
-      <van-icon :name="icon"
-        size="14px"
-        color="#909399" />
-    </slot>
+    <div class="d-flex ai-center"
+      @click="onRightClick">
+      <slot name="icon">
+        <van-icon :name="icon"
+          size="14px"
+          color="#909399" />
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -27,6 +30,10 @@ export default class HeaderTitle extends Vue {
   @Prop({ default: '' }) private title?: string
   @Prop({ default: '' }) private sub?: string
   @Prop({ default: 'arrow' }) private icon?: string
+
+  onRightClick() {
+    this.$emit('click')
+  }
 }
 </script>
 
