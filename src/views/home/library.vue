@@ -12,18 +12,8 @@
     </van-swipe>
 
     <header-title class="discovery__header-title"
-      title="Album"
-      sub="Arists">
-      <div>
-        <span class="content__item"
-          :class="{'content__item--active': active==='Album'}"
-          @click="active='Album'">Album</span>
-        <span class="content__divide">/</span>
-        <span class="content__item"
-          :class="{'content__item--active': active==='Arists'}"
-          @click="active='Arists'">Arists</span>
-      </div>
-    </header-title>
+      v-model="active"
+      :content="['Album','Arists']" />
   </div>
 </template>
 

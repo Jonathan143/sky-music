@@ -23,12 +23,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component
 export default class Home extends Vue {
   active = 'Suggest'
   tabList = ['Suggest', 'Favorites', 'Library']
+
+  @Watch('$route.name', { immediate: true })
+  onRouteNameChange(name: string) {
+    this.active = name.replace('home', '')
+  }
 }
 </script>
 
