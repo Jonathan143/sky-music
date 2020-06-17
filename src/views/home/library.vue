@@ -11,9 +11,15 @@
       </van-swipe-item>
     </van-swipe>
 
-    <header-title class="discovery__header-title"
-      v-model="active"
-      :content="['Album','Arists']" />
+    <div>
+      <header-title class="discovery__header-title"
+        v-model="active"
+        :content="['Album','Arists']" />
+
+      <div style="padding: 12px">
+        <album-box></album-box>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,9 +28,7 @@ import { fetchBanner, fetchSongList } from '@/api/home'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
-  components: {
-    HeaderTitle: () => import('@/components/HeaderTitle.vue')
-  }
+  components: {}
 })
 export default class HomeLibrary extends Vue {
   bannerList = []
