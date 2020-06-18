@@ -16,8 +16,11 @@
         v-model="active"
         :content="['Album','Arists']" />
 
-      <div style="padding: 12px">
-        <album-box></album-box>
+      <div class="discovery__album-container scroll-x d-flex">
+        <template v-for="i of 10">
+          <album-box :key="i"
+            size="68px"></album-box>
+        </template>
       </div>
     </div>
   </div>
@@ -90,6 +93,12 @@ export default class HomeLibrary extends Vue {
           color: $color-text-main;
         }
       }
+    }
+  }
+  &__album-container {
+    padding: 12px;
+    & > .album-box {
+      padding-right: 36px;
     }
   }
 }

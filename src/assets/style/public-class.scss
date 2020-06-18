@@ -93,3 +93,25 @@ $sizes: (0, 5, 10, 15, 20);
 .#{$prefix}-pl {
   padding-left: 20px !important;
 }
+
+%scrolling-touch {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-y {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  @extend %scrolling-touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.scroll-x {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  @extend %scrolling-touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

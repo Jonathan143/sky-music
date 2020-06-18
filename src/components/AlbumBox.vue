@@ -11,8 +11,10 @@
         :height="size"
         round
         :src="require('@/assets/image/singlecover.png')" />
-    </div>
 
+      <van-icon name="play-circle"
+        class="album-box__play-icon" />
+    </div>
   </div>
 </template>
 
@@ -37,6 +39,13 @@ export default class extends Vue {
     position: absolute;
     left: 12px;
     top: 0;
+  }
+
+  &__play-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
   }
 }
 </style>
