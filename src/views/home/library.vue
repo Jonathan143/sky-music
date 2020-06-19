@@ -17,9 +17,12 @@
         :content="['Album','Arists']" />
 
       <div class="discovery__album-container scroll-x d-flex">
-        <template v-for="i of 10">
-          <album-box :key="i"
-            size="68px"></album-box>
+        <template v-for="album of AlbumList">
+          <album-box :key="album.id"
+            size="68px"
+            :src="album.picUrl"
+            :main="album.name"
+            :sub="album.copywriter"></album-box>
         </template>
       </div>
     </div>
@@ -27,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { fetchBanner, fetchSongList } from '@/api/home'
+import { fetchBanner, fetchAlbumList } from '@/api/home'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
@@ -35,13 +38,13 @@ import { Component, Vue } from 'vue-property-decorator'
 })
 export default class HomeLibrary extends Vue {
   bannerList = []
-  songList = []
+  AlbumList = []
   active = 'Album'
 
   async mounted() {
-    const result = await Promise.all([fetchBanner(), fetchSongList()])
+    const result = await Promise.all([fetchBanner(), fetchAlbumList()])
     this.bannerList = result[0]
-    this.songList = result[1]
+    this.AlbumList = result[1]
   }
 }
 </script>

@@ -1,7 +1,7 @@
 @import '~@/assets/style/unit/color.scss';
 
 // 工具类名统一前缀
-$prefix: om;
+$prefix: sky;
 
 // 禁止用户选中 鼠标变为手形
 %unable-select {
@@ -41,12 +41,4 @@ $prefix: om;
   border-radius: 4px;
   font-size: 14px;
   position: relative;
-}
-
-@mixin test_multiEllipsis($line: 1) {
-  word-break: break-all;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: $line;
-  -webkit-box-orient: vertical;
 }

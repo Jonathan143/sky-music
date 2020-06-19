@@ -19,7 +19,7 @@ const fetchBanner = async () => {
 }
 
 // 推荐歌单
-const fetchSongList = async (limit?: number) => {
+const fetchAlbumList = async (limit?: number) => {
   try {
     const data: any = await axios(`personalized?limit=${limit || 10}`)
     return data.result.map((item: any) => ({
@@ -31,4 +31,4 @@ const fetchSongList = async (limit?: number) => {
   }
 }
 
-export { fetchBanner, fetchSongList }
+export { fetchBanner, fetchAlbumList }
