@@ -61,7 +61,7 @@ export default class HeaderTitle extends Vue {
         color: $color-text-sub;
         transition: all 0.3s ease-in-out;
         &--active {
-          font-size: 16px;
+          font-size: 18px;
           font-weight: bold;
           color: $color-text-main;
         }

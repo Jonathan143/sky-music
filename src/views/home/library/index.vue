@@ -16,35 +16,37 @@
         v-model="active"
         :content="['Album','Arists']" />
 
-      <div class="discovery__album-container scroll-x d-flex">
-        <template v-for="album of AlbumList">
-          <album-box :key="album.id"
-            size="68px"
-            :src="album.picUrl"
-            :main="album.name"
-            :sub="album.copywriter"></album-box>
-        </template>
-      </div>
+      <keep-alive>
+        <component :is="active" />
+      </keep-alive>
+    </div>
+
+    <div>
+      <header-title class="discovery__header-title"
+        size="18px"
+        value="Popular"
+        content="Popular" />
+      <home-popular />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { fetchBanner, fetchAlbumList } from '@/api/home'
+import { fetchBanner } from '@/api/home'
+import Album from './components/HomeAlbum.vue'
+import Arists from './components/HomeArists.vue'
+import HomePopular from './components/HomePopular.vue'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
-  components: {}
+  components: { Album, Arists, HomePopular }
 })
 export default class HomeLibrary extends Vue {
   bannerList = []
-  AlbumList = []
   active = 'Album'
 
   async mounted() {
-    const result = await Promise.all([fetchBanner(), fetchAlbumList()])
-    this.bannerList = result[0]
-    this.AlbumList = result[1]
+    this.bannerList = await fetchBanner()
   }
 }
 </script>
@@ -96,12 +98,6 @@ export default class HomeLibrary extends Vue {
           color: $color-text-main;
         }
       }
-    }
-  }
-  &__album-container {
-    padding: 12px;
-    & > .album-box {
-      padding-right: 36px;
     }
   }
 }

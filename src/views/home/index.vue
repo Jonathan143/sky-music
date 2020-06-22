@@ -9,6 +9,7 @@
           <van-tab :title="tab"
             :key="tab"
             :name="tab"
+            replace
             :to="{name:`home${tab}`}" />
         </template>
       </van-tabs>
@@ -50,12 +51,11 @@ export default class Home extends Vue {
     left: 0;
     top: 0;
     z-index: 99;
+    background-color: #fff;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     ::v-deep .van-tabs {
       flex: 1;
       margin: 0 18px;
-      .van-tabs__nav {
-        background-color: unset;
-      }
       .van-tab__text {
         transition: all 0.3s ease-in-out;
         font-weight: 600;
@@ -64,6 +64,9 @@ export default class Home extends Vue {
         .van-tab__text {
           font-weight: 700;
         }
+      }
+      .van-hairline--top-bottom::after {
+        border: none;
       }
     }
   }

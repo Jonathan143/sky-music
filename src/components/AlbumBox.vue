@@ -60,15 +60,15 @@ export default class extends Vue {
 
   &__play-icon {
     position: absolute;
-    right: 3px;
-    top: 3px;
-    font-size: 18px;
+    right: 4px;
+    top: 4px;
+    font-size: 20px;
     color: #fff;
     z-index: 3;
   }
 
   &__content {
-    padding-top: 4px;
+    padding-top: 8px;
     .content {
       &__main {
         font-size: 14px;
@@ -76,7 +76,7 @@ export default class extends Vue {
         color: $color-text-main;
       }
       &__sub {
-        font-size: 12px;
+        font-size: 11px;
         color: $color-text-sub;
       }
     }
