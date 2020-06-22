@@ -36,6 +36,7 @@ export default class HomeArists extends Vue {
 <style lang="scss" scoped>
 .home-arists {
   padding: 12px;
+  height: 114px;
   user-select: none;
   &__item {
     flex-shrink: 0;

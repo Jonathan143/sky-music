@@ -29,6 +29,7 @@ export default class HomeAlbum extends Vue {
 <style lang="scss" scoped>
 .home-album {
   padding: 12px;
+  height: 114px;
   & > .album-box {
     padding-right: 36px;
   }

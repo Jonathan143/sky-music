@@ -84,6 +84,7 @@ export default class HomePopular extends Vue {
     border-radius: 20px 20px 0 0;
     .header__name {
       font-size: 14px;
+      line-height: 1;
       color: #fff;
       padding-right: 3px;
     }

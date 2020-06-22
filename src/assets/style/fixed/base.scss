@@ -103,18 +103,6 @@ video {
   border-color: initial;
   border-image: initial;
 }
-.form-create {
-  .el-row {
-    > .el-col {
-      &:last-child {
-        button {
-          float: right;
-          width: unset !important;
-        }
-      }
-    }
-  }
-}
 
 @font-face {
   font-family: 'pingFangSC-Bold';
