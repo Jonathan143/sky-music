@@ -28,9 +28,10 @@
                 :src="item.picUrl"
                 width="38px"
                 height="38px"
+                lazy-load
                 round />
               <div>
-                <p class="content__item-name">{{item.name}}</p>
+                <p class="content__item-name sky-ellipsis">{{item.name}}</p>
                 <p class="content__item-singer">{{item.singer}}</p>
               </div>
             </div>
@@ -102,9 +103,10 @@ export default class HomePopular extends Vue {
       &-serial {
         color: $color-text-sub;
         flex-shrink: 0;
+        min-width: 26px;
       }
       &-avatar {
-        margin: 0 12px;
+        margin-right: 12px;
         flex-shrink: 0;
       }
       &-name {

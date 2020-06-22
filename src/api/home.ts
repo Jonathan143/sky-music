@@ -19,7 +19,7 @@ const fetchBanner = async () => {
 }
 
 // 推荐歌单
-const fetchAlbumList = async (limit: number = 10) => {
+const fetchAlbumList = async (limit = 10) => {
   try {
     const data: any = await axios('personalized', { params: { limit } })
     return data.result.map((item: any) => ({
@@ -32,7 +32,7 @@ const fetchAlbumList = async (limit: number = 10) => {
 }
 
 // 获取歌手列表
-const fetchAristsList = async (limit: number = 10, offset: Number = 0) => {
+const fetchAristsList = async (limit = 10, offset = 0) => {
   try {
     const data: any = await axios('top/artists', { params: { limit, offset } })
     return data.artists.map((item: any) => ({
@@ -45,7 +45,7 @@ const fetchAristsList = async (limit: number = 10, offset: Number = 0) => {
 }
 
 // 获取排行榜详情
-const fetchRankingList = async (idx: number | string, limit?: Number) => {
+const fetchRankingList = async (idx: number | string, limit?: number) => {
   try {
     const data: any = await axios('top/list', { params: { idx } })
     const {

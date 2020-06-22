@@ -5,6 +5,7 @@
       <van-image class="album-box__cover"
         :width="size"
         :height="size"
+        lazy-load
         radius="12px"
         :src="src" />
       <van-image class="album-box__cd-cover"

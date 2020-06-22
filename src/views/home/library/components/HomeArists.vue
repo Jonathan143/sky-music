@@ -6,6 +6,7 @@
       :key="index">
       <van-image radius="12px"
         :src="arists.picUrl"
+        lazy-load
         fit="cover" />
 
       <div class="home-arists__name sky-ellipsis">{{arists.name}}</div>
