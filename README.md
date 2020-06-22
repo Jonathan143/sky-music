@@ -1,5 +1,19 @@
 # oxygen-music-v2
 
+## 后端服务
+
+> 网易云音乐 Node.js API service
+
+[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+```bash
+git clone https://github.com/Binaryify/NeteaseCloudMusicApi.git
+
+yarn
+
+yarn start
+```
+
 ## Project setup
 
 ```bash
