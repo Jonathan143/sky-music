@@ -7,7 +7,7 @@ export default {
   path: '/',
   name: 'home',
   meta,
-  redirect: { name: 'homeLibrary' },
+  redirect: { name: 'homeSuggest' },
   component: _import('home'),
   children: (pre => [
     {
