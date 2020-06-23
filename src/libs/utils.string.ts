@@ -1,2 +1,2 @@
-export const compressionParam = (url: string) =>
-  `${url.replace(/https?:/, '')}?param=180y180`
+export const compressionParam = (url: string, x = 180, y = 180) =>
+  `${url.replace(/https?:/, '')}?param=${x}y${y}`

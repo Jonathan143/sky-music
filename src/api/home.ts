@@ -1,5 +1,4 @@
 import axios from '@/plugins/axios'
-import { compressionParam } from '@/libs/utils.string'
 
 // 首页banner
 const fetchBanner = async () => {
@@ -22,10 +21,7 @@ const fetchBanner = async () => {
 const fetchAlbumList = async (limit = 10) => {
   try {
     const data: any = await axios('personalized', { params: { limit } })
-    return data.result.map((item: any) => ({
-      ...item,
-      picUrl: compressionParam(item.picUrl)
-    }))
+    return data.result
   } catch (error) {
     return []
   }
@@ -35,10 +31,7 @@ const fetchAlbumList = async (limit = 10) => {
 const fetchAristsList = async (limit = 10, offset = 0) => {
   try {
     const data: any = await axios('top/artists', { params: { limit, offset } })
-    return data.artists.map((item: any) => ({
-      ...item,
-      picUrl: compressionParam(item.picUrl)
-    }))
+    return data.artists
   } catch (error) {
     return []
   }
@@ -66,7 +59,7 @@ const fetchRankingList = async (idx: number | string, limit?: number) => {
         id: t.id,
         singer: t.ar[0].name, //歌手
         alName: t.al.name, //专辑名
-        picUrl: compressionParam(t.al.picUrl) //歌曲图片
+        picUrl: t.al.picUrl //歌曲图片
       })
     }
     return {

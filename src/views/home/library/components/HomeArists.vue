@@ -5,7 +5,7 @@
       :style="{'animation-delay': `${0.1*index}s`}"
       :key="index">
       <van-image radius="12px"
-        :src="arists.picUrl"
+        :src="arists.picUrl|compressionParam"
         lazy-load
         fit="cover" />
 

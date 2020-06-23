@@ -5,7 +5,7 @@
         class="animated fadeInUp"
         :style="{'animation-delay': `${0.1*index}s`}"
         size="68px"
-        :src="album.picUrl"
+        :src="album.picUrl|compressionParam"
         :main="album.name"
         :sub="album.copywriter"></album-box>
     </template>

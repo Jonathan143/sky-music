@@ -54,6 +54,9 @@ export default class HomeLibrary extends Vue {
 <style lang="scss" scoped>
 .discovery {
   margin-top: 44px;
+  .van-swipe {
+    height: 163px;
+  }
   &-swipe__image-container {
     padding: 10px 12px;
     ::v-deep .van-image {
