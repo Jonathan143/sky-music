@@ -15,6 +15,7 @@
         :src="require('@/assets/image/singlecover.png')" />
 
       <van-icon name="play-circle"
+        v-if="playVisible"
         class="album-box__play-icon"
         @click.stop="onPlayClick" />
     </div>
@@ -36,12 +37,16 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop({ default: '', type: String }) src?: string
+  @Prop({ default: '', type: [String, Number] }) id?: string
   @Prop({ default: '60', type: [String, Number] }) size?: string
   @Prop({ default: true, type: Boolean }) column?: boolean
   @Prop({ default: '', type: [String, Number] }) main?: string
   @Prop({ default: '', type: [String, Number] }) sub?: string
+  @Prop({ default: true, type: Boolean }) playVisible?: string
 
-  onPlayClick() {}
+  onPlayClick() {
+    this.$emit('play', this.id)
+  }
 }
 </script>
 
