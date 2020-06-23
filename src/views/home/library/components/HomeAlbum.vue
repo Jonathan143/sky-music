@@ -3,7 +3,7 @@
     <template v-for="(album, index) of albumList">
       <album-box :key="album.id"
         class="animated fadeInUp"
-        :style="{'animation-delay': `${0.1*index}s`}"
+        :style="{'animation-delay': `${0.1*index}s`,animationDuration: '0.5s'}"
         size="68px"
         :src="album.picUrl|compressionParam"
         :main="album.name"

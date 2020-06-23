@@ -3,7 +3,8 @@
     <div class="song-list__item d-flex ai-center"
       v-for="(item, i) of data"
       :key="i">
-      <span class="song-list__item-serial">{{i+1}}</span>
+      <span class="song-list__item-serial"
+        v-if="serial">{{i+1}}</span>
       <van-image class="song-list__item-avatar"
         :src="item[coverKey]|compressionParam"
         width="38px"
@@ -29,6 +30,7 @@ export default class SongList extends Vue {
   @Prop({ type: String, default: 'picUrl' }) private coverKey?: string
   @Prop({ type: String, default: 'name' }) private nameKey?: string
   @Prop({ type: String, default: 'singer' }) private singerKey?: string
+  @Prop({ type: Boolean, default: true }) private serial?: boolean // 是否显示序列号
 }
 </script>
 

@@ -19,7 +19,9 @@
         src="https://img.yzcdn.cn/vant/cat.jpeg" />
     </div>
 
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 

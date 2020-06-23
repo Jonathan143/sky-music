@@ -2,7 +2,7 @@
   <div class="home-arists scroll-x d-flex">
     <template v-for="(arists, index) of aristsList">
       <arists-box class="home-arists__item animated fadeInUp"
-        :style="{'animation-delay': `${0.1*index}s`}"
+        :style="{animationDelay: `${0.1*index}s`,animationDuration: '0.5s'}"
         :key="index"
         :data="arists" />
     </template>
