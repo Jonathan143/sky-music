@@ -9,7 +9,8 @@ import {
   Image,
   Tabs,
   Tab,
-  Icon
+  Icon,
+  Circle
 } from 'vant'
 
 Vue.use(Button)
@@ -22,3 +23,4 @@ Vue.use(Button)
   .use(Tabs)
   .use(Tab)
   .use(Icon)
+  .use(Circle)
