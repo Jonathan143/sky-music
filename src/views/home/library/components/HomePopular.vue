@@ -20,7 +20,7 @@
           </div>
 
           <song-list class="home-popular__content"
-            :data="ranking.tracks" />
+            :data="ranking.tracks||[]" />
         </div>
       </van-swipe-item>
     </van-swipe>

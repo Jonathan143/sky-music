@@ -1,9 +1,9 @@
 import Vue from 'vue'
 // 全局组件自动注册
-const componentsContext = require.context('./', true, /\.vue$/)
+const componentsContext = require.context('./', true, /\index.vue$/)
 
 componentsContext.keys().forEach((component: string) => {
-  const name = (component.match(/\.\/(\S*)\./) as any)[1]
+  const name = (component.match(/\.\/(\S*)\//) as any)[1]
 
   const componentConfig = componentsContext(component)
   /**
