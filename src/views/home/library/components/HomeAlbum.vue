@@ -7,7 +7,9 @@
         size="68px"
         :src="album.picUrl|compressionParam"
         :main="album.name"
-        :sub="album.copywriter"></album-box>
+        :id="album.id"
+        :sub="album.copywriter"
+        @play="onPlayClick"></album-box>
     </template>
   </div>
 </template>
@@ -15,10 +17,21 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { fetchAlbumList } from '@/api/home'
+import { Action, Mutation } from 'vuex-class'
 
 @Component
 export default class HomeAlbum extends Vue {
+  @Action('playNextMusic') playNextMusic!: Function
+  @Action('updatePlayList') updatePlayList!: Function
+
   albumList = []
+
+  async onPlayClick(id: number) {
+    console.log(id)
+
+    await this.updatePlayList({ id })
+    await this.playNextMusic()
+  }
 
   async mounted() {
     this.albumList = await fetchAlbumList()

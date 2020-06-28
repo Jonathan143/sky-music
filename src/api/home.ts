@@ -37,10 +37,13 @@ const fetchAristsList = async (limit = 10, offset = 0) => {
   }
 }
 
-// 获取排行榜详情
-const fetchRankingList = async (idx: number | string, limit?: number) => {
+// 获取歌单详情
+const fetchPlayListDetail = async (
+  idx: number | string,
+  limit?: number
+): Promise<skyMusic.playList> => {
   try {
-    const data: any = await axios('top/list', { params: { idx } })
+    const data: any = await axios('playlist/detail', { params: { id: idx } })
     const {
       coverImgUrl,
       tracks,
@@ -52,7 +55,7 @@ const fetchRankingList = async (idx: number | string, limit?: number) => {
       commentCount,
       description
     } = data.playlist
-    const formatTracks = []
+    const formatTracks: Array<skyMusic.music> = []
     for (const t of limit ? tracks.slice(0, limit) : tracks) {
       formatTracks.push({
         name: t.name, //歌名
@@ -74,8 +77,8 @@ const fetchRankingList = async (idx: number | string, limit?: number) => {
       description
     }
   } catch (error) {
-    return {}
+    return { tracks: [] }
   }
 }
 
-export { fetchBanner, fetchAlbumList, fetchAristsList, fetchRankingList }
+export { fetchBanner, fetchAlbumList, fetchAristsList, fetchPlayListDetail }

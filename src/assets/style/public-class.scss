@@ -133,3 +133,9 @@ $sizes: (0, 5, 10, 15, 20);
     display: none;
   }
 }
+
+// ios 底部安全区适配
+.safe-area-inset-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

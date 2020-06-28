@@ -5,7 +5,6 @@ body {
   height: 100%;
   font-family: 'pingFangSC-Bold';
   #app {
-    @extend %full;
     a {
       text-decoration: none;
     }

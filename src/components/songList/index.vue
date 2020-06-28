@@ -2,7 +2,8 @@
   <div class="song-list">
     <div class="song-list__item d-flex ai-center"
       v-for="(item, i) of data"
-      :key="i">
+      :key="i"
+      @click="onItemClick(item)">
       <span class="song-list__item-serial"
         v-if="serial">{{i+1}}</span>
       <van-image class="song-list__item-avatar"
@@ -31,6 +32,10 @@ export default class SongList extends Vue {
   @Prop({ type: String, default: 'name' }) private nameKey?: string
   @Prop({ type: String, default: 'singer' }) private singerKey?: string
   @Prop({ type: Boolean, default: true }) private serial?: boolean // 是否显示序列号
+
+  onItemClick(value: any) {
+    this.$emit('item-click', value)
+  }
 }
 </script>
 

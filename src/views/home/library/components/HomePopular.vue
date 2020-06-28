@@ -16,11 +16,12 @@
 
             <van-icon name="play-circle"
               size="20px"
-              @click.stop="onPlayClick" />
+              @click.stop="onPlayClick(ranking)" />
           </div>
 
           <song-list class="home-popular__content"
-            :data="ranking.tracks||[]" />
+            :data="ranking.tracks||[]"
+            @item-click="onSongItemClick" />
         </div>
       </van-swipe-item>
     </van-swipe>
@@ -29,13 +30,26 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { fetchRankingList } from '@/api/home'
+import { fetchPlayListDetail } from '@/api/home'
+import { Action, Mutation } from 'vuex-class'
 
 @Component
 export default class HomePopular extends Vue {
+  @Action('playNextMusic') playNextMusic!: Function
+  @Action('updatePlayList') updatePlayList!: Function
+  @Mutation('unshiftMusic') unshiftMusic!: Function
+
   rankingList = []
 
-  onPlayClick() {}
+  async onPlayClick(ranking: skyMusic.playList) {
+    await this.updatePlayList({ list: ranking.tracks })
+    await this.playNextMusic()
+  }
+
+  async onSongItemClick(song: any) {
+    this.unshiftMusic(song)
+    await this.playNextMusic(song)
+  }
 
   getHeaderStyle(index: number) {
     const colors = [
@@ -50,8 +64,8 @@ export default class HomePopular extends Vue {
 
   async mounted() {
     const requests = []
-    for (const id of [1, 0, 3]) {
-      requests.push(fetchRankingList(id, 10))
+    for (const id of [3778678, 3779629, 19723756]) {
+      requests.push(fetchPlayListDetail(id, 10))
     }
     this.rankingList = (await Promise.all(requests)) as []
   }
