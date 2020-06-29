@@ -1,3 +1,4 @@
+// 基础接口无需登录认证
 import axios from '@/plugins/axios'
 
 // 首页banner
@@ -81,4 +82,25 @@ const fetchPlayListDetail = async (
   }
 }
 
-export { fetchBanner, fetchAlbumList, fetchAristsList, fetchPlayListDetail }
+const fetchPersonalizedNewSongs = async () => {
+  try {
+    const { result }: any = await axios('/personalized/newsong')
+    return result.map(({ id, name, picUrl, song }: any) => ({
+      id,
+      name,
+      picUrl,
+      singer: song.artists[0].name,
+      alName: song.album.name
+    }))
+  } catch (error) {
+    return []
+  }
+}
+
+export {
+  fetchBanner,
+  fetchAlbumList,
+  fetchAristsList,
+  fetchPlayListDetail,
+  fetchPersonalizedNewSongs
+}
