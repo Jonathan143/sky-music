@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { fetchPlayListDetail } from '@/api/home'
+import { fetchPlayListDetail } from '@/api/basis'
 import cloneDeep from 'lodash/cloneDeep'
 
 Vue.use(Vuex)

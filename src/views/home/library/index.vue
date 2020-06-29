@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { fetchBanner } from '@/api/home'
+import { fetchBanner } from '@/api/basis'
 import Album from './components/HomeAlbum.vue'
 import Arists from './components/HomeArists.vue'
 import HomePopular from './components/HomePopular.vue'

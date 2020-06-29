@@ -10,7 +10,9 @@ import {
   Tabs,
   Tab,
   Icon,
-  Circle
+  Circle,
+  Toast,
+  Dialog
 } from 'vant'
 
 Vue.use(Button)
@@ -24,3 +26,5 @@ Vue.use(Button)
   .use(Tab)
   .use(Icon)
   .use(Circle)
+  .use(Toast)
+  .use(Dialog)

@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { fetchAlbumList } from '@/api/home'
+import { fetchAlbumList } from '@/api/basis'
 import { Action, Mutation } from 'vuex-class'
 
 @Component
@@ -27,8 +27,6 @@ export default class HomeAlbum extends Vue {
   albumList = []
 
   async onPlayClick(id: number) {
-    console.log(id)
-
     await this.updatePlayList({ id })
     await this.playNextMusic()
   }

@@ -1,15 +1,49 @@
 <template>
   <div class="suggest">
+    <div class="suggest__header">
 
+    </div>
+    <div class="suggest__content">
+      <song-list :data="musicList"
+        @item-click="onSongItemClick" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { fetchPersonalizedNewSongs } from '@/api/basis'
+import { Action, Mutation } from 'vuex-class'
 
 @Component
-export default class HomeSuggest extends Vue {}
+export default class HomeSuggest extends Vue {
+  @Action('playNextMusic') playNextMusic!: Function
+  @Action('updatePlayList') updatePlayList!: Function
+  @Mutation('unshiftMusic') unshiftMusic!: Function
+  musicList = []
+
+  async onSongItemClick(song: skyMusic.music) {
+    this.unshiftMusic(song)
+    await this.playNextMusic(song)
+  }
+
+  async mounted() {
+    this.musicList = await fetchPersonalizedNewSongs()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
+.suggest {
+  &__header {
+    width: 100%;
+    height: 240px;
+    background-image: linear-gradient(35deg, #9795f0 0%, #fbc8d4 100%);
+  }
+  &__content {
+    margin-top: -26px;
+    background-color: #fff;
+    border-radius: 26px 26px 0 0;
+  }
+}
 </style>

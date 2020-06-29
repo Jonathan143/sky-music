@@ -1,6 +1,6 @@
 <template>
   <div class="sky-player safe-area-inset-bottom">
-    <van-icon name="fire-o" />
+    <van-icon name="like-o" />
     <van-icon name="arrow-left" />
 
     <div class="sky-player__content">
@@ -60,16 +60,30 @@ export default class SkyPlayer extends Vue {
   initData() {
     this.$nextTick(() => {
       Vue.prototype.$skyPlayer = this.refSkyAudio
+
+      // 开始播放
       this.refSkyAudio.onplaying = e => {
         this.tooglePlayState(true)
         document.title = this.currentMusic.name
       }
+
+      // 播放进度
       this.refSkyAudio.ontimeupdate = (e: any) => {
         const { currentTime, duration } = e.target
         this.currentRate = parseInt((currentTime / duration) * 100 + '')
       }
+
+      // 播放结束
       this.refSkyAudio.onended = () => {
         this.playNextMusic()
+      }
+
+      // 加载失败
+      this.refSkyAudio.onerror = () => {
+        if (this.playList.length) {
+          this.$toast('歌曲加载失败')
+          this.playNextMusic()
+        }
       }
     })
   }

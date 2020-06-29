@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { fetchAristsList } from '@/api/home'
+import { fetchAristsList } from '@/api/basis'
 
 @Component
 export default class HomeArists extends Vue {

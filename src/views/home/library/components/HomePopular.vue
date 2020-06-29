@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { fetchPlayListDetail } from '@/api/home'
+import { fetchPlayListDetail } from '@/api/basis'
 import { Action, Mutation } from 'vuex-class'
 
 @Component
@@ -46,7 +46,7 @@ export default class HomePopular extends Vue {
     await this.playNextMusic()
   }
 
-  async onSongItemClick(song: any) {
+  async onSongItemClick(song: skyMusic.music) {
     this.unshiftMusic(song)
     await this.playNextMusic(song)
   }

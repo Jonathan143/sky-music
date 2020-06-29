@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <div class="home-header">
+    <div class="home-header"
+      :class="{'home-header-background': active!=='Suggest'}">
       <van-icon name="search" />
       <van-tabs v-model="active"
         color="#9025fc"
@@ -16,7 +17,7 @@
       <van-image round
         width="30px"
         height="30px"
-        src="https://img.yzcdn.cn/vant/cat.jpeg" />
+        :src="require('@/assets/image/logo.png')" />
     </div>
 
     <keep-alive>
@@ -52,11 +53,16 @@ export default class Home extends Vue {
     left: 0;
     top: 0;
     z-index: 99;
-    background-color: #fff;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    &-background {
+      background-color: #fff;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
     ::v-deep .van-tabs {
       flex: 1;
       margin: 0 18px;
+      .van-tabs__nav {
+        background-color: unset;
+      }
       .van-tab__text {
         transition: all 0.3s ease-in-out;
         font-weight: 600;
