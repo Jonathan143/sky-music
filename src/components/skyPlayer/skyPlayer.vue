@@ -1,7 +1,8 @@
 <template>
   <div class="sky-player safe-area-inset-bottom">
     <van-icon name="like-o" />
-    <van-icon name="arrow-left" />
+    <van-icon name="arrow-left"
+      @click="playPreviousMusic" />
 
     <div class="sky-player__content">
       <van-circle v-model="currentRate"
@@ -23,7 +24,8 @@
         @click="()=>this.tooglePlayState()" />
     </div>
 
-    <van-icon name="arrow" />
+    <van-icon name="arrow"
+      @click="playNextMusic()" />
     <van-icon name="wap-nav" />
     <audio ref="skyAudio"
       :src="msuicSrc"
@@ -45,6 +47,7 @@ export default class SkyPlayer extends Vue {
 
   @Mutation('tooglePlayState') tooglePlayState!: Function
   @Action('playNextMusic') playNextMusic!: Function
+  @Action('playPreviousMusic') playPreviousMusic!: Function
 
   currentRate = 100
   gradientColor = {

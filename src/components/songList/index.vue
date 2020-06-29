@@ -1,8 +1,9 @@
 <template>
   <div class="song-list">
-    <div class="song-list__item d-flex ai-center"
+    <div class="song-list__item d-flex ai-center animated bounceInUp"
       v-for="(item, i) of data"
       :key="i"
+      :style="{'animation-delay': `${0.1*i}s`}"
       @click="onItemClick(item)">
       <span class="song-list__item-serial"
         v-if="serial">{{i+1}}</span>
@@ -44,6 +45,7 @@ export default class SongList extends Vue {
   padding: 12px 12px 12px 0;
   &__item {
     padding: 12px 0;
+    animation-duration: 0.5s;
     &-serial {
       color: $color-text-sub;
       flex-shrink: 0;

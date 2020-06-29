@@ -3,7 +3,7 @@
     <template v-for="(album, index) of albumList">
       <album-box :key="album.id"
         class="animated fadeInUp"
-        :style="{'animation-delay': `${0.1*index}s`,animationDuration: '0.5s'}"
+        :style="{'animation-delay': `${0.1*index}s`}"
         size="68px"
         :src="album.picUrl|compressionParam"
         :main="album.name"
@@ -42,6 +42,7 @@ export default class HomeAlbum extends Vue {
   padding: 12px;
   height: 114px;
   & > .album-box {
+    animation-duration: 0.4s;
     padding-right: 36px;
   }
 }

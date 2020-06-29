@@ -61,7 +61,7 @@ const fetchPlayListDetail = async (
       formatTracks.push({
         name: t.name, //歌名
         id: t.id,
-        singer: t.ar[0].name, //歌手
+        singer: t.ar.map((item: any) => item.name).join(), //歌手
         alName: t.al.name, //专辑名
         picUrl: t.al.picUrl //歌曲图片
       })
@@ -89,8 +89,25 @@ const fetchPersonalizedNewSongs = async () => {
       id,
       name,
       picUrl,
-      singer: song.artists[0].name,
+      singer: song.artists.map((item: any) => item.name).join(),
       alName: song.album.name
+    }))
+  } catch (error) {
+    return []
+  }
+}
+
+const fetchSingerTop50Songs = async (idx: string | number) => {
+  try {
+    const { songs }: any = await axios('artist/top/song', {
+      params: { id: idx }
+    })
+    return songs.map((t: any) => ({
+      name: t.name, //歌名
+      id: t.id,
+      singer: t.ar.map((item: any) => item.name).join(), //歌手
+      alName: t.al.name, //专辑名
+      picUrl: t.al.picUrl //歌曲图片
     }))
   } catch (error) {
     return []
@@ -102,5 +119,6 @@ export {
   fetchAlbumList,
   fetchAristsList,
   fetchPlayListDetail,
-  fetchPersonalizedNewSongs
+  fetchPersonalizedNewSongs,
+  fetchSingerTop50Songs
 }

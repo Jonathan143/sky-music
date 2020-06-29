@@ -33,8 +33,11 @@ export default new Vuex.Store({
         Vue.prototype.$skyPlayer[state.isPlaying ? 'play' : 'pause']()
     },
 
+    // 插入歌曲
     unshiftMusic(state, value) {
-      state.playList.unshift(value)
+      if (state.playList.findIndex(item => item.id === value.id) === -1) {
+        state.playList.unshift(value)
+      }
     }
   },
   actions: {
@@ -43,6 +46,9 @@ export default new Vuex.Store({
       if (value) {
         state.currentMusic = value
       } else {
+        // debugger
+        console.log(state.currentMusic)
+
         let index = getters.currentMusicIndex
         index = index === state.playList.length - 1 ? 0 : index + 1
         state.currentMusic = state.playList[index]
@@ -50,6 +56,18 @@ export default new Vuex.Store({
       setTimeout(() => {
         Vue.prototype.$skyPlayer.play()
       }, 10)
+    },
+
+    // 播放上一首歌曲
+    playPreviousMusic({ state, getters }) {
+      const index = getters.currentMusicIndex
+      if (index) {
+        state.currentMusic = state.playList[index - 1]
+        setTimeout(() => {
+          Vue.prototype.$skyPlayer.play()
+        }, 10)
+      }
+      Vue.prototype.$toast('已经是第一首歌曲了')
     },
 
     // 添加下一首播放歌曲

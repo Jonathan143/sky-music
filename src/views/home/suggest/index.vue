@@ -1,6 +1,8 @@
 <template>
   <div class="suggest">
-    <div class="suggest__header">
+    <div class="suggest__header d-flex ai-center jc-center">
+      <p>Hi</p>
+      <p>Made for you</p>
       <div class="suggest__header-play-all d-flex ai-center jc-center"
         @click="onPlayAllClick">
         <van-icon class=""
@@ -49,6 +51,9 @@ export default class HomeSuggest extends Vue {
   &__header {
     width: 100%;
     height: 240px;
+    color: #fff;
+    font-size: 26px;
+    flex-direction: column;
     background-image: linear-gradient(35deg, #9795f0 0%, #fbc8d4 100%);
     &-play-all {
       position: absolute;
