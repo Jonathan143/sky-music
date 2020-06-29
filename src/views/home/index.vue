@@ -53,8 +53,9 @@ export default class Home extends Vue {
     left: 0;
     top: 0;
     z-index: 99;
+    backdrop-filter: blur(6px);
     &-background {
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     }
     ::v-deep .van-tabs {

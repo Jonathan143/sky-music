@@ -1,7 +1,13 @@
 <template>
   <div class="suggest">
     <div class="suggest__header">
-
+      <div class="suggest__header-play-all d-flex ai-center jc-center"
+        @click="onPlayAllClick">
+        <van-icon class=""
+          name="play"
+          color="#fff"
+          size="38px" />
+      </div>
     </div>
     <div class="suggest__content">
       <song-list :data="musicList"
@@ -27,6 +33,11 @@ export default class HomeSuggest extends Vue {
     await this.playNextMusic(song)
   }
 
+  async onPlayAllClick() {
+    await this.updatePlayList({ list: this.musicList })
+    await this.playNextMusic(this.musicList[0])
+  }
+
   async mounted() {
     this.musicList = await fetchPersonalizedNewSongs()
   }
@@ -39,9 +50,19 @@ export default class HomeSuggest extends Vue {
     width: 100%;
     height: 240px;
     background-image: linear-gradient(35deg, #9795f0 0%, #fbc8d4 100%);
+    &-play-all {
+      position: absolute;
+      left: calc(50% - 30px);
+      top: 184px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: $color-primary;
+    }
   }
   &__content {
     margin-top: -26px;
+    padding-top: 20px;
     background-color: #fff;
     border-radius: 26px 26px 0 0;
   }
