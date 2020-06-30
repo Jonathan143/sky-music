@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,16 @@ routesContext.keys().forEach(router => {
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  const { isCheckedLoginStatus, isLogin } = store.state
+  if (!isCheckedLoginStatus && !isLogin) {
+    try {
+      await store.dispatch('checkLoginStatus')
+    } catch (error) {}
+    next()
+  } else next()
 })
 
 export default router

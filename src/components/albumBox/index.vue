@@ -1,6 +1,6 @@
 <template>
   <div class="album-box d-flex"
-    :class="{'flex-column': column}">
+    :class="{'flex-row': row}">
     <div class="album-box__cover-container">
       <van-image class="album-box__cover"
         :width="size"
@@ -22,10 +22,12 @@
 
     <slot>
       <div class="album-box__content">
-        <div class="content__main sky-ellipsis"
-          v-if="main">{{main}}</div>
-        <div class="content__sub sky-ellipsis"
-          v-if="sub">{{sub}}</div>
+        <div class="content__main sky-ellipsis">
+          <slot name="main">{{main}}</slot>
+        </div>
+        <div class="content__sub sky-ellipsis">
+          <slot name="sub">{{sub}}</slot>
+        </div>
       </div>
     </slot>
   </div>
@@ -39,7 +41,7 @@ export default class extends Vue {
   @Prop({ default: '', type: String }) src?: string
   @Prop({ default: '', type: [String, Number] }) id?: string
   @Prop({ default: '60', type: [String, Number] }) size?: string
-  @Prop({ default: true, type: Boolean }) column?: boolean
+  @Prop({ default: false, type: Boolean }) row?: boolean
   @Prop({ default: '', type: [String, Number] }) main?: string
   @Prop({ default: '', type: [String, Number] }) sub?: string
   @Prop({ default: true, type: Boolean }) playVisible?: string
@@ -52,6 +54,7 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 .album-box {
+  flex-direction: column;
   &__cover-container {
     position: relative;
   }
@@ -88,7 +91,23 @@ export default class extends Vue {
     }
   }
 }
-.flex-column {
-  flex-direction: column;
+.flex-row {
+  flex-direction: row;
+  .album-box {
+    &__content {
+      padding: {
+        top: 0;
+        left: 20px;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .content__main {
+        font-size: 15px;
+        font-weight: bold;
+        padding-bottom: 8px;
+      }
+    }
+  }
 }
 </style>

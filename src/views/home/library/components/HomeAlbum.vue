@@ -9,7 +9,7 @@
         :main="album.name"
         :id="album.id"
         :sub="album.artist.name"
-        @play="onPlayClick"></album-box>
+        @play="onPlayClick(album.id)"></album-box>
     </template>
   </div>
 </template>
@@ -18,6 +18,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { fetchAlbumList } from '@/api/basis'
 import { Action, Mutation } from 'vuex-class'
+import { fetchAlbumDetail } from '@/api/basis'
 
 @Component
 export default class HomeAlbum extends Vue {
@@ -27,7 +28,7 @@ export default class HomeAlbum extends Vue {
   albumList = []
 
   async onPlayClick(id: number) {
-    await this.updatePlayList({ id })
+    await this.updatePlayList({ list: await fetchAlbumDetail(id) })
     await this.playNextMusic()
   }
 

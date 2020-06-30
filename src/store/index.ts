@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    userInfo: {},
+    isCheckedLoginStatus: false,
+    userInfo: { userId: '' },
 
     isPlaying: false,
     playList: [] as Array<skyMusic.music>,
@@ -52,6 +53,7 @@ export default new Vuex.Store({
       } catch (error) {
         state.isLogin = false
       }
+      state.isCheckedLoginStatus = true
     },
 
     // 播放下一首歌曲

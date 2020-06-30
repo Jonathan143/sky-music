@@ -1,11 +1,11 @@
 <template>
-  <div class="artists">
-    <header-title class="artists__header-title"
-      size="18px"
+  <div class="favorites-artists">
+    <header-title class="favorites-artists__header-title"
+      size="22px"
       value="Artists"
       content="Artists" />
 
-    <div class="artists__content scroll-x d-flex">
+    <div class="favorites-artists__content scroll-x d-flex">
       <template v-for="(arists, index) of aristsList">
         <arists-box class="content__item animated fadeInUp"
           :style="{animationDelay: `${0.1*index}s`}"
@@ -47,7 +47,7 @@ export default class FavoritesArtists extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.artists {
+.favorites-artists {
   &__content {
     padding: 12px;
     height: 160px;

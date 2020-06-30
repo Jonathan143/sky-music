@@ -5,6 +5,7 @@ import axios from '@/plugins/axios'
 export function fetchLoginUserStatus() {
   return axios('login/status')
 }
+
 // 获取用户信息
 export function fetchUserDetail(uid: number) {
   return axios('user/detail', {

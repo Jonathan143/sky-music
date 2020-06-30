@@ -5,8 +5,7 @@
       <p>Made for you</p>
       <div class="suggest__header-play-all d-flex ai-center jc-center"
         @click="onPlayAllClick">
-        <van-icon class=""
-          name="play"
+        <van-icon name="play"
           color="#fff"
           size="38px" />
       </div>

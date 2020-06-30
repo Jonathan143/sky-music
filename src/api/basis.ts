@@ -28,6 +28,21 @@ export async function fetchAlbumList(limit = 10) {
   }
 }
 
+export async function fetchAlbumDetail(idx: number) {
+  try {
+    const { songs }: any = await axios('album', { params: { id: idx } })
+    return songs.map((t: any) => ({
+      name: t.name, //歌名
+      id: t.id,
+      singer: t.ar.map((item: any) => item.name).join(), //歌手
+      alName: t.al.name, //专辑名
+      picUrl: t.al.picUrl //歌曲图片
+    }))
+  } catch (error) {
+    return []
+  }
+}
+
 // 获取歌手列表
 export async function fetchAristsList(limit = 10, offset = 0) {
   try {
@@ -84,6 +99,7 @@ export async function fetchPlayListDetail(
   }
 }
 
+// 获取最新歌曲
 export async function fetchPersonalizedNewSongs() {
   try {
     const { result }: any = await axios('/personalized/newsong')
@@ -99,6 +115,7 @@ export async function fetchPersonalizedNewSongs() {
   }
 }
 
+// 获取歌手热门50首歌曲
 export async function fetchSingerTop50Songs(idx: string | number) {
   try {
     const { songs }: any = await axios('artist/top/song', {
