@@ -17,7 +17,7 @@
       <van-image round
         width="30px"
         height="30px"
-        :src="require('@/assets/image/logo.png')" />
+        :src="avatar" />
     </div>
 
     <keep-alive>
@@ -28,11 +28,18 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
+import { State } from 'vuex-class'
 
 @Component
 export default class Home extends Vue {
+  @State('userInfo') userInfo!: skyMusic.userInfo
+
   active = 'Suggest'
   tabList = ['Suggest', 'Favorites', 'Library']
+
+  public get avatar(): string {
+    return this.userInfo.avatarUrl || require('@/assets/image/logo.png')
+  }
 
   @Watch('$route.name', { immediate: true })
   onRouteNameChange(name: string) {

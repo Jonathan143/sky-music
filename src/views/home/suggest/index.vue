@@ -1,7 +1,7 @@
 <template>
   <div class="suggest">
     <div class="suggest__header d-flex ai-center jc-center">
-      <p>Hi</p>
+      <p>Hi {{userInfo.nickname}}</p>
       <p>Made for you</p>
       <div class="suggest__header-play-all d-flex ai-center jc-center"
         @click="onPlayAllClick">
@@ -20,10 +20,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { fetchPersonalizedNewSongs } from '@/api/basis'
-import { Action, Mutation } from 'vuex-class'
+import { State, Action, Mutation } from 'vuex-class'
 
 @Component
 export default class HomeSuggest extends Vue {
+  @State('userInfo') userInfo!: skyMusic.userInfo
   @Action('playNextMusic') playNextMusic!: Function
   @Action('updatePlayList') updatePlayList!: Function
   @Mutation('unshiftMusic') unshiftMusic!: Function

@@ -36,7 +36,7 @@ import { fetchFavoritePlaylist } from '@/api/auth'
 
 @Component
 export default class FavoritesPlaylist extends Vue {
-  @State('userInfo') userInfo!: { userId: number }
+  @State('userInfo') userInfo!: skyMusic.userInfo
   @Action('playNextMusic') playNextMusic!: Function
   @Action('updatePlayList') updatePlayList!: Function
 

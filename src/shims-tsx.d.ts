@@ -1,4 +1,5 @@
 import Vue, { VNode } from 'vue'
+import instance from './plugins/axios'
 
 declare global {
   namespace JSX {
@@ -30,6 +31,15 @@ declare global {
       shareCount?: string | number
       commentCount?: string | number
       description?: string
+    }
+
+    interface userInfo {
+      avatarUrl: string
+      birthday?: string
+      djStatus?: number
+      nickname: string
+      userId: number
+      userType?: number
     }
   }
 }
