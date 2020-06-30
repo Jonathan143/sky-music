@@ -37,7 +37,7 @@ export default class HeaderTitle extends Vue {
 
   public get mainContent() {
     return typeof this.content === 'string'
-      ? this.content.split()
+      ? this.content.split(' ')
       : this.content
   }
 

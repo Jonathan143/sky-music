@@ -17,6 +17,7 @@ module.exports = {
   runtimeCompiler: false,
 
   lintOnSave: true,
+  parallel: false,
 
   css: {
     loaderOptions: {
