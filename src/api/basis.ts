@@ -2,7 +2,7 @@
 import axios from '@/plugins/axios'
 
 // 首页banner
-const fetchBanner = async () => {
+export async function fetchBanner() {
   try {
     const data: any = await axios('banner')
     return data.banners.map(
@@ -18,31 +18,33 @@ const fetchBanner = async () => {
   }
 }
 
-// 推荐歌单
-const fetchAlbumList = async (limit = 10) => {
+// 推荐最新专辑
+export async function fetchAlbumList(limit = 10) {
   try {
-    const data: any = await axios('personalized', { params: { limit } })
-    return data.result
+    const data: any = await axios('album/newest', { params: { limit } })
+    return data.albums
   } catch (error) {
     return []
   }
 }
 
 // 获取歌手列表
-const fetchAristsList = async (limit = 10, offset = 0) => {
+export async function fetchAristsList(limit = 10, offset = 0) {
   try {
-    const data: any = await axios('top/artists', { params: { limit, offset } })
-    return data.artists
+    const { artists, more }: any = await axios('top/artists', {
+      params: { limit, offset }
+    })
+    return { list: artists, more }
   } catch (error) {
-    return []
+    return { list: [], more: false }
   }
 }
 
 // 获取歌单详情
-const fetchPlayListDetail = async (
+export async function fetchPlayListDetail(
   idx: number | string,
   limit?: number
-): Promise<skyMusic.playList> => {
+): Promise<skyMusic.playList> {
   try {
     const data: any = await axios('playlist/detail', { params: { id: idx } })
     const {
@@ -82,7 +84,7 @@ const fetchPlayListDetail = async (
   }
 }
 
-const fetchPersonalizedNewSongs = async () => {
+export async function fetchPersonalizedNewSongs() {
   try {
     const { result }: any = await axios('/personalized/newsong')
     return result.map(({ id, name, picUrl, song }: any) => ({
@@ -97,7 +99,7 @@ const fetchPersonalizedNewSongs = async () => {
   }
 }
 
-const fetchSingerTop50Songs = async (idx: string | number) => {
+export async function fetchSingerTop50Songs(idx: string | number) {
   try {
     const { songs }: any = await axios('artist/top/song', {
       params: { id: idx }
@@ -112,13 +114,4 @@ const fetchSingerTop50Songs = async (idx: string | number) => {
   } catch (error) {
     return []
   }
-}
-
-export {
-  fetchBanner,
-  fetchAlbumList,
-  fetchAristsList,
-  fetchPlayListDetail,
-  fetchPersonalizedNewSongs,
-  fetchSingerTop50Songs
 }

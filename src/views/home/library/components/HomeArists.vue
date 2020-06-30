@@ -28,7 +28,8 @@ export default class HomeArists extends Vue {
   }
 
   async mounted() {
-    this.aristsList = await fetchAristsList()
+    const { list } = await fetchAristsList()
+    this.aristsList = list
   }
 }
 </script>

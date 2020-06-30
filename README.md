@@ -52,6 +52,10 @@ npm run lint
 - revert ：撤回提交
 - test ：添加或修正测试
 
+## ui
+
+> 参考[M.usic 音乐 APP 概念设计](https://www.ui.cn/detail/540793.html)如有侵权请联系
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

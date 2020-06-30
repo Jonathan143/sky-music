@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { fetchPlayListDetail } from '@/api/basis'
+import { fetchLoginUserStatus } from '@/api/auth'
 import cloneDeep from 'lodash/cloneDeep'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tooken: '',
+    isLogin: false,
+    userInfo: {},
+
     isPlaying: false,
     playList: [] as Array<skyMusic.music>,
     currentMusic: {} as skyMusic.music
@@ -41,14 +44,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async checkLoginStatus({ state }) {
+      try {
+        const { profile }: any = await fetchLoginUserStatus()
+        state.isLogin = true
+        state.userInfo = { ...state.userInfo, ...profile }
+      } catch (error) {
+        state.isLogin = false
+      }
+    },
+
     // 播放下一首歌曲
     playNextMusic({ state, getters }, value) {
       if (value) {
         state.currentMusic = value
       } else {
-        // debugger
-        console.log(state.currentMusic)
-
         let index = getters.currentMusicIndex
         index = index === state.playList.length - 1 ? 0 : index + 1
         state.currentMusic = state.playList[index]

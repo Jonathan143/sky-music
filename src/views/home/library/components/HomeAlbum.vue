@@ -8,7 +8,7 @@
         :src="album.picUrl|compressionParam"
         :main="album.name"
         :id="album.id"
-        :sub="album.copywriter"
+        :sub="album.artist.name"
         @play="onPlayClick"></album-box>
     </template>
   </div>
