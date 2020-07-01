@@ -8,7 +8,8 @@
     <van-empty v-else
       class="sky-empty-image"
       :image="$CUSTOMIMAGE.login"
-      description="请先登录" />
+      description="请先登录"
+      @click.native="onGoLoginClick" />
   </div>
 </template>
 
@@ -23,6 +24,13 @@ import { State } from 'vuex-class'
 })
 export default class HomeFavorites extends Vue {
   @State('userInfo') userInfo!: skyMusic.userInfo
+
+  onGoLoginClick() {
+    this.$router.push({
+      name: 'login',
+      query: { redirect: this.$route.fullPath }
+    })
+  }
 }
 </script>
 

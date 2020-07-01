@@ -17,7 +17,8 @@
       <van-image round
         width="30px"
         height="30px"
-        :src="avatar" />
+        :src="avatar"
+        @click="onAvatarClick" />
     </div>
 
     <keep-alive>
@@ -33,12 +34,21 @@ import { State } from 'vuex-class'
 @Component
 export default class Home extends Vue {
   @State('userInfo') userInfo!: skyMusic.userInfo
+  @State('isLogin') isLogin!: boolean
 
   active = 'Suggest'
   tabList = ['Suggest', 'Favorites', 'Library']
 
   public get avatar(): string {
     return this.userInfo.avatarUrl || require('@/assets/image/logo.png')
+  }
+
+  onAvatarClick() {
+    this.isLogin &&
+      this.$router.push({
+        name: 'login',
+        query: { redirect: this.$route.fullPath }
+      })
   }
 
   @Watch('$route.name', { immediate: true })

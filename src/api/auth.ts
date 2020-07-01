@@ -13,6 +13,27 @@ export function fetchUserDetail(uid: number) {
   })
 }
 
+// 登录
+export function login(phone: string, password: string) {
+  return axios('/login/cellphone', {
+    params: { phone, password }
+  })
+}
+
+// 发送验证码
+export function sendCaptcha(phone: string) {
+  return axios('/captcha/sent', {
+    params: { phone }
+  })
+}
+
+// 验证验证码
+export function verifyCaptcha(phone: string, captcha: string) {
+  return axios('/captcha/verify', {
+    params: { phone, captcha }
+  })
+}
+
 // 获取收藏的歌手列表
 export function fetchFavoriteArtists() {
   return axios('artist/sublist')

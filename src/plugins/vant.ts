@@ -13,7 +13,13 @@ import {
   Circle,
   Toast,
   Dialog,
-  Empty
+  Empty,
+  CountDown,
+  Field,
+  Form,
+  PasswordInput,
+  Popup,
+  NumberKeyboard
 } from 'vant'
 
 Vue.use(Button)
@@ -30,3 +36,9 @@ Vue.use(Button)
   .use(Toast)
   .use(Dialog)
   .use(Empty)
+  .use(CountDown)
+  .use(Field)
+  .use(Form)
+  .use(PasswordInput)
+  .use(NumberKeyboard)
+  .use(Popup)
