@@ -65,7 +65,7 @@ export default class HomePopular extends Vue {
   async mounted() {
     const requests = []
     for (const id of [3778678, 3779629, 19723756]) {
-      requests.push(fetchPlayListDetail(id, 10))
+      requests.push(await fetchPlayListDetail(id, 10))
     }
     this.rankingList = (await Promise.all(requests)) as []
   }

@@ -65,6 +65,10 @@ export default class FavoritesArtists extends Vue {
       flex-shrink: 0;
       padding-right: 16px;
       animation-duration: 0.4s;
+      ::v-deep .arists-box__play-icon {
+        top: 8px;
+        right: 26px;
+      }
     }
   }
 }
