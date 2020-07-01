@@ -6,16 +6,22 @@
     <van-form @submit="onSubmit">
       <van-field v-model="cellphone"
         type="number"
-        name="手机号"
+        name="cellphone"
         placeholder="手机号"
-        :rules="[{ required: true, message: '请输入正确的手机号', validator: isMobilePhone }]" />
+        :rules="rules.cellphone" />
+      <van-field v-model="password"
+        type="password"
+        name="password"
+        placeholder="密码"
+        :rules="rules.password" />
 
       <div style="margin: 16px;">
         <van-button round
           block
           type="info"
+          color="linear-gradient(to right, #F067B4,#9025fc)"
           native-type="submit">
-          获取验证码
+          登录
         </van-button>
       </div>
     </van-form>
@@ -32,7 +38,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import isMobilePhone from 'validator/lib/isMobilePhone'
 import Captcha from './components/Captcha.vue'
-import { sendCaptcha } from '@/api/auth'
+import { sendCaptcha, login } from '@/api/auth'
 import VueRouter from 'vue-router'
 
 //yun.yang143.cn/2020/07/01/591aa29490f8b.svg
@@ -43,6 +49,26 @@ export default class SkyLogin extends Vue {
   cellphone = ''
   password = ''
   isSmsVisible: boolean = false
+  rules = {
+    cellphone: [
+      {
+        required: true,
+        message: '请输入手机号'
+      },
+      {
+        required: true,
+        message: '请输入正确的手机号',
+        validator: this.isMobilePhone
+      }
+    ],
+    password: [
+      { required: true, message: '请输入密码' },
+      {
+        validator: this.verifyPassword,
+        message: '包含字母、数字、符号中至少两种；密码长度为6-16位'
+      }
+    ]
+  }
 
   @Watch('$route.query', { immediate: true })
   queryChanged(query: any) {
@@ -58,8 +84,12 @@ export default class SkyLogin extends Vue {
   isMobilePhone(phone: number) {
     return isMobilePhone(phone + '', 'zh-CN')
   }
+  verifyPassword(password: string) {
+    const REG = /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/
+    return REG.test(password)
+  }
 
-  async onSubmit(values: any) {
+  async onSendCaptchaClick() {
     try {
       const loading = this.$toast.loading({
         duration: 0, // 持续展示 toast
@@ -72,6 +102,22 @@ export default class SkyLogin extends Vue {
         query: { isSmsVisible: 'true', ...this.$route.query }
       })
       this.$toast('发送成功')
+    } catch (error) {}
+  }
+
+  async onSubmit(values: any) {
+    try {
+      const loading = this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true,
+        message: '登录中...'
+      })
+      await login(this.cellphone, this.password)
+      loading.clear()
+      this.$toast('登录成功')
+
+      const fullPath: any = this.$route.query.fullPath
+      this.$router.replace(fullPath ? { path: fullPath } : { name: 'home' })
     } catch (error) {}
   }
 }

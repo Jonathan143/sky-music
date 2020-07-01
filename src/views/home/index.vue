@@ -44,7 +44,7 @@ export default class Home extends Vue {
   }
 
   onAvatarClick() {
-    this.isLogin &&
+    !this.isLogin &&
       this.$router.push({
         name: 'login',
         query: { redirect: this.$route.fullPath }
