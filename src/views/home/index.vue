@@ -17,7 +17,7 @@
       <van-image round
         width="30px"
         height="30px"
-        :src="avatar"
+        :src="avatar|replaceHttp"
         @click="onAvatarClick" />
     </div>
 

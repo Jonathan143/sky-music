@@ -4,7 +4,7 @@
       <van-swipe-item v-for="(banner, index) in bannerList"
         :key="index">
         <div class="discovery-swipe__image-container">
-          <van-image :src="banner.imageUrl"
+          <van-image :src="banner.imageUrl|replaceHttp"
             height="140px"
             lazy-load />
         </div>
