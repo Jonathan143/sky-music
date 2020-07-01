@@ -12,7 +12,8 @@ import {
   Icon,
   Circle,
   Toast,
-  Dialog
+  Dialog,
+  Empty
 } from 'vant'
 
 Vue.use(Button)
@@ -28,3 +29,4 @@ Vue.use(Button)
   .use(Circle)
   .use(Toast)
   .use(Dialog)
+  .use(Empty)

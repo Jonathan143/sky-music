@@ -26,6 +26,11 @@
         </div>
       </template>
     </div>
+
+    <van-empty v-show="!playlist.length"
+      class="sky-empty-image"
+      :image="$CUSTOMIMAGE.empty"
+      description="暂无收藏歌单" />
   </div>
 </template>
 
@@ -49,8 +54,10 @@ export default class FavoritesPlaylist extends Vue {
 
   async mounted() {
     try {
-      const data: any = await fetchFavoritePlaylist(this.userInfo.userId)
-      this.playlist = data.playlist
+      if (this.userInfo.userId) {
+        const data: any = await fetchFavoritePlaylist(this.userInfo.userId)
+        this.playlist = data.playlist
+      }
     } catch (error) {}
   }
 }

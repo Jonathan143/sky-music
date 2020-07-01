@@ -5,8 +5,10 @@ import store from './store'
 import './components'
 import './plugins/vant'
 import './plugins/filter'
+import { CUSTOMIMAGE } from './config'
 
 Vue.config.productionTip = false
+Vue.prototype.$CUSTOMIMAGE = CUSTOMIMAGE
 
 new Vue({
   router,

@@ -15,7 +15,13 @@
           :data="arists"
           @play="onPlayAllClick" />
       </template>
+
+      <van-empty v-show="!aristsList.length"
+        class="sky-empty-image"
+        :image="$CUSTOMIMAGE.empty"
+        description="暂无收藏专辑" />
     </div>
+
   </div>
 </template>
 
@@ -23,11 +29,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { fetchSingerTop50Songs } from '@/api/basis'
 import { fetchFavoriteArtists } from '@/api/auth'
-import { Action } from 'vuex-class'
+import { Action, State } from 'vuex-class'
 @Component
 export default class FavoritesArtists extends Vue {
   @Action('updatePlayList') updatePlayList!: Function
   @Action('playNextMusic') playNextMusic!: Function
+  @State('isLogin') isLogin!: boolean
 
   aristsList = []
 
@@ -39,8 +46,10 @@ export default class FavoritesArtists extends Vue {
 
   async mounted() {
     try {
-      const result = await fetchFavoriteArtists()
-      this.aristsList = result.data.slice(0, 10)
+      if (this.isLogin) {
+        const result = await fetchFavoriteArtists()
+        this.aristsList = result.data.slice(0, 10)
+      }
     } catch (error) {}
   }
 }
