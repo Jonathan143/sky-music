@@ -40,12 +40,15 @@ import isMobilePhone from 'validator/lib/isMobilePhone'
 import Captcha from './components/Captcha.vue'
 import { sendCaptcha, login } from '@/api/auth'
 import VueRouter from 'vue-router'
+import { Mutation } from 'vuex-class'
 
 //yun.yang143.cn/2020/07/01/591aa29490f8b.svg
 //yun.yang143.cn/2020/07/01/62e033579d8ef.svg
 
 @Component({ components: { Captcha } })
 export default class SkyLogin extends Vue {
+  @Mutation('updateUserInfo') updateUserInfo!: Function
+
   cellphone = ''
   password = ''
   isSmsVisible: boolean = false
@@ -112,7 +115,8 @@ export default class SkyLogin extends Vue {
         forbidClick: true,
         message: '登录中...'
       })
-      await login(this.cellphone, this.password)
+      const { profile }: any = await login(this.cellphone, this.password)
+      this.updateUserInfo(profile)
       loading.clear()
       this.$toast('登录成功')
 

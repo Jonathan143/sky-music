@@ -42,14 +42,18 @@ export default new Vuex.Store({
       if (state.playList.findIndex(item => item.id === value.id) === -1) {
         state.playList.unshift(value)
       }
+    },
+
+    updateUserInfo(state, value) {
+      state.userInfo = { ...state.userInfo, ...value }
     }
   },
   actions: {
-    async checkLoginStatus({ state }) {
+    async checkLoginStatus({ state, commit }) {
       try {
         const { profile }: any = await fetchLoginUserStatus()
         state.isLogin = true
-        state.userInfo = { ...state.userInfo, ...profile }
+        commit('updateUserInfo', profile)
       } catch (error) {
         state.isLogin = false
       }
