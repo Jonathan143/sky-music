@@ -51,7 +51,7 @@ export default class SkyLogin extends Vue {
 
   cellphone = ''
   password = ''
-  isSmsVisible: boolean = false
+  isSmsVisible = false
   rules = {
     cellphone: [
       {

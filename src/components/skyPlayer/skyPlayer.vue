@@ -1,5 +1,6 @@
 <template>
-  <div class="sky-player safe-area-inset-bottom">
+  <div class="sky-player safe-area-inset-bottom"
+    @touchmove="onTouchMove">
     <van-icon name="like-o" />
     <van-icon name="arrow-left"
       @click="playPreviousMusic" />
@@ -34,8 +35,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Ref } from 'vue-property-decorator'
+import { Component, Vue, Ref, Watch } from 'vue-property-decorator'
 import { State, Mutation, Action } from 'vuex-class'
+import rgbaster from 'rgbaster'
+import { compressionParam } from '@/libs/utils.string.ts'
+import touchUtil from '@/libs/util.touch.ts'
 
 @Component
 export default class SkyPlayer extends Vue {
@@ -54,10 +58,31 @@ export default class SkyPlayer extends Vue {
     '10%': '#CE9FFC',
     '100%': '#7367F0 '
   }
+  styleColor = {}
 
   public get msuicSrc(): string {
     const id = this.currentMusic.id
     return id ? `https://music.163.com/song/media/outer/url?id=${id}.mp3` : ''
+  }
+
+  @Watch('currentMusic')
+  async rgbColor() {
+    const picUrl = compressionParam(this.currentMusic.picUrl)
+    try {
+      const res = await rgbaster(picUrl, {
+        ignore: ['rgb(255,255,255)', 'rgb(0,0,0)']
+      })
+      this.styleColor = { backgroundColor: res[0].color }
+    } catch (error) {}
+  }
+
+  onTouchStart(event: TouchEvent) {
+    touchUtil.touchStart(event)
+  }
+
+  onTouchMove(event: TouchEvent) {
+    touchUtil.touchMove(event)
+    console.log(touchUtil.direction)
   }
 
   initData() {

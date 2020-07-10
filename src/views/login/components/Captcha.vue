@@ -25,7 +25,7 @@ import { verifyCaptcha } from '@/api/auth'
 export default class LoginCaptcha extends Vue {
   @Prop({ required: true, type: [String, Number] }) phone!: string
 
-  showKeyboard: boolean = false
+  showKeyboard = false
   captcha = ''
 
   async onInput(key: string) {
