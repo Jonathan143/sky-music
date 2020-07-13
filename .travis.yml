@@ -3,11 +3,14 @@ node_js: stable
 cache:
   directories:
     - node_modules
+
 branches:
   only:
     - master
+
 script:
   - yarn run build
+
 before_install:
   - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv
     -in deploy_key.enc -out ./deploy_key -d
@@ -15,8 +18,7 @@ before_install:
   - chmod 600 ./deploy_key
   - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - ssh-add ./deploy_key
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
+
 after_success:
   - scp -rp $PORT /home/travis/build/Jonathan143/sky-music/dist root@$SERVERIP:$SERVERDIR
   - curl https://sc.ftqq.com/$SCKEY.send?text=sky-music部署成功
