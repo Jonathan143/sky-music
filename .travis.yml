@@ -5,7 +5,7 @@ cache:
     - node_modules
 branches:
   only:
-    - master__js
+    - master
 script:
   - yarn run build
 before_install:
