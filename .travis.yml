@@ -22,5 +22,5 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 after_success:
-  - scp -rP $PORT /home/travis/build/Jonathan143/sky-music/dist root@$SERVERIP:$SERVERDIR
+  - scp -rP $PORT /home/travis/build/Jonathan143/sky-music/dist root@$SERVER_IP_ADDRESS:$SERVER_DIR
   - curl https://sc.ftqq.com/$SCKEY.send?text=sky-music%E9%83%A8%E7%BD%B2%E6%88%90%E5%8A%9F
