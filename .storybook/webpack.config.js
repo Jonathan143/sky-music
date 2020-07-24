@@ -1,36 +1,34 @@
-const path = require('path')
-const resolve = dir => require('path').join(__dirname, dir)
+const merge = require('webpack-merge')
 
-module.exports = async ({ config, mode }) => {
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      'vue-style-loader',
-      'css-loader',
-      'sass-loader',
-      {
-        loader: 'sass-resources-loader',
-        options: {
-          resources: path.resolve(__dirname, '../src/assets/style/public.scss')
-        }
+const genStorybookDefaultConfig = require('@storybook/vue/dist/server/framework-preset-vue.js')
+  .webpack
+const vueConfig = require('@vue/cli-service/webpack.config.js')
+module.exports = ({ config, mode }) => {
+  const storybookConfig = genStorybookDefaultConfig(config, mode)
+
+  return {
+    ...vueConfig, // use vue's webpack configuration by default
+    entry: storybookConfig.entry, // overwite entry
+    output: storybookConfig.output, // overwrite output
+    // remove duplicated plugins
+    plugins: merge({
+      customizeArray: merge.unique(
+        'plugins',
+        [
+          // 'HotModuleReplacementPlugin',
+          'CaseSensitivePathsPlugin',
+          'WatchMissingNodeModulesPlugin',
+          'VueLoaderPlugin'
+        ],
+        plugin => plugin.constructor && plugin.constructor.name
+      )
+    })(vueConfig, storybookConfig).plugins,
+    resolve: {
+      ...vueConfig.resolve,
+      alias: {
+        ...vueConfig.resolve.alias,
+        vue$: storybookConfig.resolve.alias.vue$
       }
-    ],
-    include: path.resolve(__dirname, '../')
-  })
-
-  config.module.rules.push({
-    test: /\.(ts|tsx)$/,
-    use: [
-      {
-        loader: require.resolve('ts-loader')
-      }
-    ]
-  })
-  config.resolve.extensions.push('.ts', '.tsx')
-
-  config.resolve.alias['@'] = resolve('../src')
-
-  console.log(config)
-  // Return the altered config
-  return config
+    }
+  }
 }
