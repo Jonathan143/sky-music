@@ -39,7 +39,7 @@ export default class HomePopular extends Vue {
   @Action('updatePlayList') updatePlayList!: Function
   @Mutation('unshiftMusic') unshiftMusic!: Function
 
-  rankingList = []
+  rankingList = [{}, {}, {}]
 
   async onPlayClick(ranking: skyMusic.playList) {
     await this.updatePlayList({ list: ranking.tracks })

@@ -1,25 +1,34 @@
 <template>
   <div class="song-list">
-    <div class="song-list__item d-flex ai-center animated bounceInUp"
-      v-for="(item, i) of data"
-      :key="i"
-      :style="{'animation-delay': `${0.1*i}s`}"
-      @click="onItemClick(item)">
-      <span class="song-list__item-serial"
-        v-if="serial">{{i+1}}</span>
-      <van-image class="song-list__item-avatar"
-        :src="item[coverKey]|compressionParam"
-        width="38px"
-        height="38px"
-        lazy-load
-        round />
-      <div style="flex: 1">
-        <p class="song-list__item-name sky-ellipsis">{{item[nameKey]}}</p>
-        <p class="song-list__item-singer">{{item[singerKey]}}</p>
+    <template v-if="!isLoading">
+      <div class="song-list__item d-flex ai-center animated bounceInUp"
+        v-for="(item, i) of data"
+        :key="i"
+        :style="{'animation-delay': `${0.1*i}s`}"
+        @click="onItemClick(item)">
+        <span class="song-list__item-serial"
+          v-if="serial">{{i+1}}</span>
+        <van-image class="song-list__item-avatar"
+          :src="item[coverKey]|compressionParam"
+          width="38px"
+          height="38px"
+          lazy-load
+          round />
+        <div style="flex: 1">
+          <p class="song-list__item-name sky-ellipsis">{{item[nameKey]}}</p>
+          <p class="song-list__item-singer">{{item[singerKey]}}</p>
+        </div>
+        <slot name="right"
+          v-bind="item"></slot>
       </div>
-      <slot name="right"
-        v-bind="item"></slot>
-    </div>
+    </template>
+    <van-skeleton title
+      v-for="i of 6"
+      :key="i"
+      avatar
+      :row="1"
+      style="margin-top: 20px;"
+      :loading="isLoading" />
   </div>
 </template>
 
@@ -33,6 +42,10 @@ export default class SongList extends Vue {
   @Prop({ type: String, default: 'name' }) private nameKey?: string
   @Prop({ type: String, default: 'singer' }) private singerKey?: string
   @Prop({ type: Boolean, default: true }) private serial?: boolean // 是否显示序列号
+
+  public get isLoading(): boolean {
+    return !this.data.length
+  }
 
   onItemClick(value: any) {
     this.$emit('item-click', value)

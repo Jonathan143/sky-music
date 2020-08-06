@@ -19,6 +19,7 @@ import {
   Form,
   PasswordInput,
   Popup,
+  Skeleton,
   NumberKeyboard
 } from 'vant'
 
@@ -42,3 +43,4 @@ Vue.use(Button)
   .use(PasswordInput)
   .use(NumberKeyboard)
   .use(Popup)
+  .use(Skeleton)

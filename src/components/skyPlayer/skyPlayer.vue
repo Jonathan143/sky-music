@@ -90,7 +90,7 @@ export default class SkyPlayer extends Vue {
       Vue.prototype.$skyPlayer = this.refSkyAudio
 
       // 开始播放
-      this.refSkyAudio.onplaying = e => {
+      this.refSkyAudio.onplaying = () => {
         this.tooglePlayState(true)
         document.title = this.currentMusic.name
       }
