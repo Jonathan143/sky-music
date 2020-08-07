@@ -1,6 +1,8 @@
 <template>
   <div class="sky-player safe-area-inset-bottom"
-    @touchmove="onTouchMove">
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd">
     <van-icon name="like-o" />
     <van-icon name="arrow-left"
       @click="playPreviousMusic" />
@@ -82,7 +84,13 @@ export default class SkyPlayer extends Vue {
 
   onTouchMove(event: TouchEvent) {
     touchUtil.touchMove(event)
-    console.log(touchUtil.direction)
+  }
+
+  onTouchEnd() {
+    const { direction, deltaY } = touchUtil
+    if (direction === 'vertical' && deltaY < -10) {
+      console.log(1)
+    }
   }
 
   initData() {

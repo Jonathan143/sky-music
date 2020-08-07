@@ -17,6 +17,8 @@ function getDirection(x: number, y: number) {
 class TouchUtil {
   startX: number = 0
   startY: number = 0
+  deltaX: number = 0
+  deltaY: number = 0
   offsetX: number = 0
   offsetY: number = 0
   direction: string = ''
@@ -29,8 +31,10 @@ class TouchUtil {
 
   touchMove(event: TouchEvent) {
     const touch = event.touches[0]
-    this.offsetX = Math.abs(touch.clientX - this.startX)
-    this.offsetY = Math.abs(touch.clientY - this.startY)
+    this.deltaX = touch.clientX - this.startX
+    this.deltaY = touch.clientY - this.startY
+    this.offsetX = Math.abs(this.deltaX)
+    this.offsetY = Math.abs(this.deltaY)
     this.direction = this.direction || getDirection(this.offsetX, this.offsetY)
   }
 
