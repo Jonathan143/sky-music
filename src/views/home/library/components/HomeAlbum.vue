@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { fetchAlbumList } from '@/api/basis'
-import { Action, Mutation } from 'vuex-class'
+import { Action } from 'vuex-class'
 import { fetchAlbumDetail } from '@/api/basis'
 
 @Component
